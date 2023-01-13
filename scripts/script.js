@@ -1,7 +1,10 @@
 const canvas = document.querySelector("canvas")
+const slider = document.getElementById("size-slider")
 ctx = canvas.getContext("2d")
 
-let isDrawing = false;
+let isDrawing = false
+
+let toolWidth = () => slider.value
 
 window.addEventListener("load", () => {
     canvas.width = canvas.offsetWidth
@@ -17,6 +20,7 @@ const drawing = (e) => {
 const startDraw = () => {
     isDrawing = true
     ctx.beginPath()
+    ctx.lineWidth = toolWidth()
 }
 
 canvas.addEventListener("mousemove", drawing)
