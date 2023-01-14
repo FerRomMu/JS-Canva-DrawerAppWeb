@@ -41,13 +41,19 @@ window.addEventListener("load", () => {
  * @param e: is the event
  */
 const drawRect = (e) => {
-    ctx.strokeRect(e.offsetX, e.offsetY,
+    if(fillColor.checked) {
+        ctx.fillRect(e.offsetX, e.offsetY,
+            downMouseX - e.offsetX,
+            downMouseY - e.offsetY)
+    } else {
+        ctx.strokeRect(e.offsetX, e.offsetY,
         downMouseX - e.offsetX,
         downMouseY - e.offsetY)
+    }
 }
 
 /**
- * Creates a rectangle from the original position of
+ * Creates a triangle from the original position of
  * the mouse when was clicked to the actual position
  * given by the event.
  * @param e: is the event
@@ -58,7 +64,7 @@ const drawTriangle = (e) => {
     ctx.lineTo(e.offsetX, e.offsetY)
     ctx.lineTo(downMouseX * 2 - e.offsetX, e.offsetY)
     ctx.closePath()
-    ctx.stroke()
+    fillColor.checked ? ctx.fill() : ctx.stroke()
 }
 
 /**
