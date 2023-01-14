@@ -7,7 +7,9 @@ toolBtns = document.querySelectorAll(".tool"),
 fillColor = document.querySelector("#fill-color"),
 colorBtns = document.querySelectorAll(".colors .option"),
 colorPicker = document.querySelector("#color-picker"),
-ctx = canvas.getContext("2d")
+ctx = canvas.getContext("2d"),
+clearCanvas = document.querySelector(".clear-canvas"),
+saveCanvas = document.querySelector(".save-img")
 
 /**
  * GLOBAL VARIABLES
@@ -176,4 +178,11 @@ colorPicker.addEventListener("change", () => {
     colorPicker.parentElement
     .style.background = colorPicker.value
     colorPicker.parentElement.click() //Calls event to refresh color
+})
+
+/**
+ * Clear canvas when clear button is clicked.
+ */
+clearCanvas.addEventListener("click", () => {
+    ctx.clearRect(0,0,canvas.width, canvas.height)
 })
