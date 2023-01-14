@@ -4,7 +4,9 @@
 const canvas = document.querySelector("canvas"),
 slider = document.getElementById("size-slider"),
 toolBtns = document.querySelectorAll(".tool"),
-fillColor = document.querySelector("#fill-color")
+fillColor = document.querySelector("#fill-color"),
+colorBtns = document.querySelectorAll(".colors .option"),
+colorPicker = document.querySelector("#color-picker"),
 ctx = canvas.getContext("2d")
 
 /**
@@ -24,7 +26,8 @@ ctx = canvas.getContext("2d")
 let isDrawing = false,
 selectedTool = "brush",
 toolWidth = () => slider.value,
-downMouseX, downMouseY, snapshot
+downMouseX, downMouseY, snapshot,
+selectedColor = "#F00"
 
 /**
  * Set canvas size.
@@ -118,6 +121,8 @@ const startDraw = (e) => {
     isDrawing = true
     ctx.beginPath()
     ctx.lineWidth = toolWidth()
+    ctx.strokeStyle = selectedColor
+    ctx.fillStyle = selectedColor
     downMouseX = e.offsetX
     downMouseY = e.offsetY
     snapshot = ctx.getImageData(0,0,canvas.width,canvas.height)
@@ -148,4 +153,24 @@ toolBtns.forEach(btn => {
         btn.classList.add("active")
         selectedTool = btn.id
     })
+})
+
+/**
+ * Sets events on colors selectors.
+ */
+colorBtns.forEach(btn => {
+    btn.addEventListener("click", () =>{
+        document.querySelector(".options .selected").classList.remove("selected")
+        btn.classList.add("selected")
+        selectedColor = window.getComputedStyle(btn).getPropertyValue("background-color")
+    })
+})
+
+/**
+ * Set event on color picker.
+ */
+colorPicker.addEventListener("change", () => {
+    colorPicker.parentElement
+    .style.background = colorPicker.value
+    colorPicker.parentElement.click() //Calls event to refresh color
 })
