@@ -53,6 +53,22 @@ const drawRect = (e) => {
 }
 
 /**
+ * Creates a circle from the original position of
+ * the mouse when was clicked to the actual position
+ * given by the event.
+ * @param e: is the event
+ */
+const drawCircle = (e) => {
+    ctx.beginPath()
+    let radius = Math.sqrt(
+        Math.pow((downMouseX - e.offsetX), 2) +
+        Math.pow((downMouseY - e.offsetY), 2)
+    )
+    ctx.arc(downMouseX, downMouseY, radius, 0, 2 * Math.PI)
+    fillColor.checked ? ctx.fill() : ctx.stroke()
+}
+
+/**
  * Creates a triangle from the original position of
  * the mouse when was clicked to the actual position
  * given by the event.
@@ -90,7 +106,7 @@ const drawing = (e) => {
     }
 
     if(selectedTool === "circle") {
-
+        drawCircle(e)
     }
 }
 
