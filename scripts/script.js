@@ -4,6 +4,7 @@
 const canvas = document.querySelector("canvas"),
 slider = document.getElementById("size-slider"),
 toolBtns = document.querySelectorAll(".tool"),
+fillColor = document.querySelector("#fill-color")
 ctx = canvas.getContext("2d")
 
 /**
@@ -46,6 +47,21 @@ const drawRect = (e) => {
 }
 
 /**
+ * Creates a rectangle from the original position of
+ * the mouse when was clicked to the actual position
+ * given by the event.
+ * @param e: is the event
+ */
+const drawTriangle = (e) => {
+    ctx.beginPath()
+    ctx.moveTo(downMouseX, downMouseY)
+    ctx.lineTo(e.offsetX, e.offsetY)
+    ctx.lineTo(downMouseX * 2 - e.offsetX, e.offsetY)
+    ctx.closePath()
+    ctx.stroke()
+}
+
+/**
  * If the mouse is being clicked execute the currently
  * active tool.
  * @param e: is the event
@@ -61,6 +77,14 @@ const drawing = (e) => {
 
     if(selectedTool === "rectangle") {
         drawRect(e)
+    }
+
+    if(selectedTool === "triangle") {
+        drawTriangle(e)
+    }
+
+    if(selectedTool === "circle") {
+
     }
 }
 
