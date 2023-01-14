@@ -186,3 +186,10 @@ colorPicker.addEventListener("change", () => {
 clearCanvas.addEventListener("click", () => {
     ctx.clearRect(0,0,canvas.width, canvas.height)
 })
+
+saveCanvas.addEventListener("click", () => {
+    const link = document.createElement("a")
+    link.download = `${Date.now()}.png`
+    link.href = canvas.toDataURL()
+    link.click()
+})
